@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OrderManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppAdministrator">
+          <Key>
+            <PropertyRef Name="AdimID" />
+          </Key>
+          <Property Name="AdimID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminName" Type="varchar(max)" />
+          <Property Name="AdminEmail" Type="varchar(max)" />
+          <Property Name="AdminPassword" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Buyers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuyerID" Type="varchar(max)" />
+          <Property Name="BuyerName" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="ShippingAddress" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Table_OrderDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="varchar(max)" />
+          <Property Name="BuyerID" Type="varchar(max)" />
+          <Property Name="BuyerEmail" Type="varchar(max)" />
+          <Property Name="OrderItemID" Type="varchar(max)" />
+          <Property Name="ProductID" Type="varchar(max)" />
+          <Property Name="OrderQuantity" Type="int" />
+          <Property Name="OrderStatus" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Table_ProductImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="varchar(max)" />
+          <Property Name="ProductImage" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Table_ProductsDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="varchar(max)" />
+          <Property Name="ProductName" Type="varchar(max)" />
+          <Property Name="ProductWeight" Type="varchar(max)" />
+          <Property Name="ProductHeight" Type="varchar(max)" />
+          <Property Name="SKU" Type="int" />
+          <Property Name="Barcode" Type="varchar(max)" />
+          <Property Name="AvailableQuantity" Type="int" />
+        </EntityType>
+        <Function Name="JoinOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BuyerID" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="JoinOrderDetailsForAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="OrderManagementSystemModelStoreContainer">
+          <EntitySet Name="AppAdministrator" EntityType="Self.AppAdministrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buyers" EntityType="Self.Buyers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_OrderDetails" EntityType="Self.Table_OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_ProductImage" EntityType="Self.Table_ProductImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_ProductsDetails" EntityType="Self.Table_ProductsDetails" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OrderManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppAdministrator">
+          <Key>
+            <PropertyRef Name="AdimID" />
+          </Key>
+          <Property Name="AdimID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdminEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuyerID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="OMSdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppAdministrators" EntityType="Self.AppAdministrator" />
+          <EntitySet Name="Buyers" EntityType="Self.Buyer" />
+          <EntitySet Name="Table_OrderDetails" EntityType="OrderManagementSystemModel.Table_OrderDetails" />
+          <EntitySet Name="Table_ProductImage" EntityType="OrderManagementSystemModel.Table_ProductImage" />
+          <EntitySet Name="Table_ProductsDetails" EntityType="OrderManagementSystemModel.Table_ProductsDetails" />
+          <FunctionImport Name="JoinOrderDetails" ReturnType="Collection(OrderManagementSystemModel.JoinOrderDetails_Result1)">
+            <Parameter Name="BuyerID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="JoinOrderDetailsForAdmin" ReturnType="Collection(OrderManagementSystemModel.JoinOrderDetailsForAdmin_Result1)" />
+        </EntityContainer>
+        <ComplexType Name="OrdersCRUD_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="BuyerID" Nullable="true" />
+          <Property Type="String" Name="BuyerName" Nullable="true" />
+          <Property Type="String" Name="BuyerEmail" Nullable="true" />
+          <Property Type="String" Name="ProductID" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" />
+          <Property Type="String" Name="ShippingAddress" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProductCRUD_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ProductID" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="Decimal" Name="ProductWeight" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ProductHeight" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="Int32" Name="SKU" Nullable="true" />
+          <Property Type="String" Name="Barcode" Nullable="true" />
+          <Property Type="Int32" Name="AvailableQuantity" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Table_OrderDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderItemID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderQuantity" Type="Int32" />
+          <Property Name="OrderStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Table_ProductImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="JoinOrderDetails_Result">
+          <Property Type="String" Name="BuyerName" Nullable="true" />
+          <Property Type="String" Name="ShippingAddress" Nullable="true" />
+          <Property Type="String" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="BuyerEmail" Nullable="true" />
+          <Property Type="String" Name="OrderItemID" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="Decimal" Name="ProductWeight" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ProductHeight" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="JoinOrderDetailsForAdmin_Result">
+          <Property Type="String" Name="BuyerName" Nullable="true" />
+          <Property Type="String" Name="ShippingAddress" Nullable="true" />
+          <Property Type="String" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="BuyerEmail" Nullable="true" />
+          <Property Type="String" Name="OrderItemID" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="Decimal" Name="ProductWeight" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ProductHeight" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <EntityType Name="Table_ProductsDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductWeight" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductHeight" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SKU" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AvailableQuantity" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="JoinOrderDetails_Result1">
+          <Property Type="String" Name="BuyerName" Nullable="true" />
+          <Property Type="String" Name="ShippingAddress" Nullable="true" />
+          <Property Type="String" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="BuyerEmail" Nullable="true" />
+          <Property Type="String" Name="OrderItemID" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="String" Name="ProductWeight" Nullable="true" />
+          <Property Type="String" Name="ProductHeight" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="JoinOrderDetailsForAdmin_Result1">
+          <Property Type="String" Name="BuyerName" Nullable="true" />
+          <Property Type="String" Name="ShippingAddress" Nullable="true" />
+          <Property Type="String" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="BuyerEmail" Nullable="true" />
+          <Property Type="String" Name="OrderItemID" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="String" Name="ProductWeight" Nullable="true" />
+          <Property Type="String" Name="ProductHeight" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OrderManagementSystemModelStoreContainer" CdmEntityContainer="OMSdbEntities">
+          <EntitySetMapping Name="AppAdministrators">
+            <EntityTypeMapping TypeName="OrderManagementSystemModel.AppAdministrator">
+              <MappingFragment StoreEntitySet="AppAdministrator">
+                <ScalarProperty Name="AdimID" ColumnName="AdimID" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buyers">
+            <EntityTypeMapping TypeName="OrderManagementSystemModel.Buyer">
+              <MappingFragment StoreEntitySet="Buyers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_OrderDetails">
+            <EntityTypeMapping TypeName="OrderManagementSystemModel.Table_OrderDetails">
+              <MappingFragment StoreEntitySet="Table_OrderDetails">
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="BuyerEmail" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_ProductImage">
+            <EntityTypeMapping TypeName="OrderManagementSystemModel.Table_ProductImage">
+              <MappingFragment StoreEntitySet="Table_ProductImage">
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_ProductsDetails">
+            <EntityTypeMapping TypeName="OrderManagementSystemModel.Table_ProductsDetails">
+              <MappingFragment StoreEntitySet="Table_ProductsDetails">
+                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="ProductHeight" ColumnName="ProductHeight" />
+                <ScalarProperty Name="ProductWeight" ColumnName="ProductWeight" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="JoinOrderDetails" FunctionName="OrderManagementSystemModel.Store.JoinOrderDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagementSystemModel.JoinOrderDetails_Result1">
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="BuyerEmail" />
+                <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductWeight" ColumnName="ProductWeight" />
+                <ScalarProperty Name="ProductHeight" ColumnName="ProductHeight" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JoinOrderDetailsForAdmin" FunctionName="OrderManagementSystemModel.Store.JoinOrderDetailsForAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagementSystemModel.JoinOrderDetailsForAdmin_Result1">
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="BuyerEmail" />
+                <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductWeight" ColumnName="ProductWeight" />
+                <ScalarProperty Name="ProductHeight" ColumnName="ProductHeight" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
